@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)file:///C:/Users/Spirit/Downloads/Telegram%20Desktop/index%20(5).html -->
+<html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<title>Document</title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<form id="inputData" class="form">
+		<h2>Insert data</h2>
+		<label>
+			Name
+			<input type="text" name="name" id="name" pattern="^\w+(\s+\w+)*$"  required value="Harry Poter">
+		</label>
+
+		<label>
+			Photo link
+			<input type="url" name="photo" id="photo" required value='https://upload.wikimedia.org/wikipedia/en/d/df/Harry_Potter_and_the_Deathly_Hallows_%E2%80%93_Part_2.jpg'>
+		</label>
+
+		<label>
+			Gender
+			<input type="text" name="gender" id="gender" required value='male'>
+		</label>
+
+		<label>
+			Birth date
+			<input type="date" name="birthDate" id="birthDay" required>
+		</label>
+
+		<label>
+			Post
+			<input type="text" name="post" id="post" pattern="^\w+(\s+\w+)*$" required value="wizard">
+		</label>
+
+		<label>
+			Salary
+			<input type="number" name="salary" id="salary" required value='18000'>
+		</label>
+
+		<div class="actionBtn">
+			<button type="button" id='addBtn'>Add</button>
+			<button type="button" id='delete'>delete</button>
+		</div>
+
+	</form>
+
+
+	<section class="employees_wrap">
+		<div id="sortBy">
+			<select name="sortField" id="option">
+				<option value="name">name</option>
+				<option value="gender">gender</option>
+				<option value="birthDate">birthDate</option>
+				<option value="post">post</option>
+				<option value="salary">salary</option>
+			</select>
+			<button type="button" id='sort'>Sort</button>
+		</div>
+		<table id="employees">
+
+		</table>
+	</section>
+
+
+
+	<script src="app.js"></script>
+
+</body></html>
