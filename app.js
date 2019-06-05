@@ -119,18 +119,19 @@ function sort(op) {
 
 function save() {
     localStorage.setItem('employList', JSON.stringify(emplList));
+    localStorage.setItem('counter', JSON.stringify(counter));
+    
 }
 
 window.onload = function () {
     if (!localStorage.getItem('employList')) return;
     downloadList();
-    for (let key in emplList) {
-        counter++;
-    }
+    counter = JSON.parse(localStorage.getItem('counter'));
     showList();
 }
 
 function downloadList() {
     emplList = JSON.parse(localStorage.getItem('employList'));
+    
 
 }
