@@ -1,6 +1,7 @@
+import save from './save.js';
 'use strict';
 
-let emplList = {};
+let employList = {};
 let NameInp = document.getElementById('name');
 let PhotoInp = document.getElementById('photo');
 let GenderInp = document.getElementById('gender');
@@ -43,10 +44,11 @@ const add = () => {
         salary = parseFloat(salaryInp.value);
     if (NameInp.validity.valid && PhotoInp.validity.valid && GenderInp.validity.valid && birthDateInp.validity.valid && postInp.validity.valid && salaryInp.validity.valid) {
         let tmp = new Employee(Name, Photo, Gender, birthDate, post, salary);
-        emplList[counter] = tmp;
+        employList[counter] = tmp;
         counter++;
         showList();
-        save();
+        save(employList);
+        save(counter);
         cleanFields();
     } else {
         alert("Fill all the Fields!!!")
@@ -63,23 +65,22 @@ const cleanFields = () => {
 }
 
 function showList() {
-    if (emplList) {
+    if (employList) {
         employees.innerHTML = '<tr><th data-option="name">Name</th><th data-option="photo">Photo</th><th data-option="gender">Gender</th><th data-option="birthDate">Birth Date</th><th data-option="post">Post</th><th data-option="salary">Salary</th> </tr>';
         let th = employees.querySelectorAll('th');
         for (let i = 0; i < th.length; i++) {
             th[i].addEventListener('click', function () {
                 sort(this.dataset.option);
                 showList();
-                save(emplList);
-
+                save(employList);
             })
         }
-        for (let key in emplList) {
+        for (let key in employList) {
             let div = document.createElement('tr');
             let input = document.createElement('input');
             input.setAttribute('type', 'checkbox');
             input.setAttribute('id', `${key}`);
-            div.innerHTML = `<td><label for="${key}">${emplList[key].name}</label></td><td><label for="${key}"><img class='photo' src='${emplList[key].photo }'></label></td><td><label for="${key}">${emplList[key].gender}</label></td><td><label for="${key}">${emplList[key].birthDate}</label></td><td><label for="${key}">${emplList[key].post}</label></td><td><label for="${key}">${emplList[key].salary}</label></td>`;
+            div.innerHTML = `<td><label for="${key}">${employList[key].name}</label></td><td><label for="${key}"><img class='photo' src='${employList[key].photo }'></label></td><td><label for="${key}">${employList[key].gender}</label></td><td><label for="${key}">${employList[key].birthDate}</label></td><td><label for="${key}">${employList[key].post}</label></td><td><label for="${key}">${employList[key].salary}</label></td>`;
             employees.appendChild(input);
             employees.appendChild(div);
         }
@@ -105,22 +106,17 @@ deleteBtn.addEventListener('click', remove);
 
 function sort(op) {
     let tmp = [];
-    for (let key in emplList) {
-        tmp.push(emplList[key]);
+    for (let key in employList) {
+        tmp.push(employList[key]);
     }
     tmp.sort((prev, next) => {
         return prev[op] > next[op] ? 1 : -1
     })
-    emplList = {};
+    employList = {};
     for (let i = 0; i < tmp.length; i++) {
-        emplList[i] = tmp[i];
+        employList[i] = tmp[i];
     }
 };
-
-function save() {
-    localStorage.setItem('employList', JSON.stringify(emplList));
-    localStorage.setItem('counter', JSON.stringify(counter));   
-}
 
 window.onload = function () {
     if (!localStorage.getItem('employList')) return;
@@ -130,7 +126,7 @@ window.onload = function () {
 }
 
 function downloadList() {
-    emplList = JSON.parse(localStorage.getItem('employList'));
+    employList = JSON.parse(localStorage.getItem('employList'));
     
 
 }
