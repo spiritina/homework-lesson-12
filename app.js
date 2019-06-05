@@ -119,8 +119,7 @@ function sort(op) {
 
 function save() {
     localStorage.setItem('employList', JSON.stringify(emplList));
-    localStorage.setItem('counter', JSON.stringify(counter));
-    
+    localStorage.setItem('counter', JSON.stringify(counter));   
 }
 
 window.onload = function () {
