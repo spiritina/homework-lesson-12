@@ -30,7 +30,7 @@ sortBtn.addEventListener('click', function () {
     let option = document.getElementById('option');
     sort(option.value);
     showList();
-    save(emplList);
+    save('employList',employList);
 })
 
 
@@ -44,11 +44,12 @@ const add = () => {
         salary = parseFloat(salaryInp.value);
     if (NameInp.validity.valid && PhotoInp.validity.valid && GenderInp.validity.valid && birthDateInp.validity.valid && postInp.validity.valid && salaryInp.validity.valid) {
         let tmp = new Employee(Name, Photo, Gender, birthDate, post, salary);
-        employList[counter] = tmp;
         counter++;
+        employList[counter] = tmp;
+        
         showList();
-        save(employList);
-        save(counter);
+        save('employList',employList);
+        save('counter',counter);
         cleanFields();
     } else {
         alert("Fill all the Fields!!!")
@@ -72,7 +73,7 @@ function showList() {
             th[i].addEventListener('click', function () {
                 sort(this.dataset.option);
                 showList();
-                save(employList);
+                save('employList',employList);
             })
         }
         for (let key in employList) {
@@ -95,12 +96,14 @@ const remove = () => {
     for (let i = (checkboxes.length - 1); i > -1; i--) {
         if (checkboxes[i].checked) {
             checkboxes[i].nextSibling.remove();     
-            delete emplList[checkboxes[i].getAttribute('id')];
+            delete employList[checkboxes[i].getAttribute('id')];
             checkboxes[i].remove();
         }
     }
-    save();
+    save('employList',employList);
+ 
 };
+
 
 deleteBtn.addEventListener('click', remove);
 
@@ -122,6 +125,8 @@ window.onload = function () {
     if (!localStorage.getItem('employList')) return;
     downloadList();
     counter = JSON.parse(localStorage.getItem('counter'));
+    console.log(employList);
+    console.log(counter);
     showList();
 }
 
